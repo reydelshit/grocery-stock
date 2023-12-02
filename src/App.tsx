@@ -8,14 +8,11 @@ import {
 } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from './components/ui/input';
+import { GoNumber } from 'react-icons/go';
 import PageHeader from './components/PageHeader';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  TbHexagonNumber1,
-  TbHexagonNumber2,
-  TbHexagonNumber3,
-} from 'react-icons/tb';
+
 import moment from 'moment';
 
 type ReportDetails = {
@@ -36,45 +33,43 @@ type ProductDetails = {
   supplier_name: string;
 };
 
-type SupplierDetails = {
-  supplier_name: string;
-  phone: string;
-  product_supplied: string;
-  address: string;
-};
-
 function App() {
   const [reports, setReports] = useState<ReportDetails[]>([]);
   const [product, setProduct] = useState<ProductDetails[]>([]);
+  const [stockHistory, setStockHistory] = useState([]);
 
-  const [suppliers, setSuppliers] = useState<SupplierDetails[]>([]);
   const [searchProduct, setSearchProduct] = useState('' as string);
 
   const getReports = () => {
-    axios.get('http://localhost/jed-inventory/reports.php').then((res) => {
-      console.log(res.data);
-      setReports(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/reports.php`)
+      .then((res) => {
+        console.log(res.data);
+        setReports(res.data);
+      });
   };
 
   const getAllProducts = () => {
-    axios.get('http://localhost/jed-inventory/product.php').then((res) => {
-      console.log(res.data, 'prorduct');
-      setProduct(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`)
+      .then((res) => {
+        console.log(res.data, 'prorduct');
+        setProduct(res.data);
+      });
   };
 
-  const getAllSuppliers = () => {
-    axios.get('http://localhost/jed-inventory/supplier.php').then((res) => {
-      console.log(res.data);
-      setSuppliers(res.data);
+  const getAllStockHistory = () => {
+    axios.get(`${import.meta.env.VITE_GROCERY_STOCK}/stock.php`).then((res) => {
+      console.log(res.data, 'prorduct');
+      setStockHistory(res.data);
     });
   };
 
   useEffect(() => {
     getReports();
     getAllProducts();
-    getAllSuppliers();
+
+    getAllStockHistory();
   }, []);
 
   return (
@@ -88,10 +83,11 @@ function App() {
               <CardTitle className="text-sm font-medium">
                 NUMBER OF PRODUCTS
               </CardTitle>
-              <TbHexagonNumber1 className="w-[3rem] h-[3rem] text-[#618264]" />
+
+              <GoNumber className="w-[3rem] h-[3rem] text-[#B99470]" />
             </CardHeader>
             <CardContent>
-              <div className="text-8xl font-bold text-[#618264]">
+              <div className="text-8xl font-bold text-[#B99470]">
                 {product.length}
               </div>
               <p className="text-xs text-muted-foreground">
@@ -103,14 +99,16 @@ function App() {
           <Card className="text-start bg-white w-full">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                RACKS AVAILABLE
+                Stock In and Stock Out
               </CardTitle>
-              <TbHexagonNumber3 className="w-[3rem] h-[3rem] text-[#618264]" />
+              <GoNumber className="w-[3rem] h-[3rem] text-[#B99470]" />
             </CardHeader>
             <CardContent>
-              <div className="text-8xl font-bold text-[#618264]">9</div>
+              <div className="text-8xl font-bold text-[#B99470]">
+                {stockHistory.length}
+              </div>
               <p className="text-xs text-muted-foreground">
-                Total number of products
+                Total number of Stock In and Stock Out
               </p>
             </CardContent>
           </Card>
@@ -121,14 +119,16 @@ function App() {
 
           <Input
             onChange={(e) => setSearchProduct(e.target.value)}
-            className="self-end mb-2 w-[20rem] border-[#618264] border-2"
+            className="self-end mb-2 w-[20rem] border-[#B99470] border-2"
             placeholder="Search product.."
           />
         </div>
 
         <Table className="border-2">
-          <TableHeader className="bg-[#618264] text-white">
+          <TableHeader className="bg-[#B99470] text-white">
             <TableRow>
+              <TableHead className="text-white"></TableHead>
+
               <TableHead className="text-white">Product Name</TableHead>
               <TableHead className="text-white">Supplier</TableHead>
 
@@ -142,6 +142,14 @@ function App() {
               .filter((prod) => prod.product_name.includes(searchProduct))
               .map((product, index) => (
                 <TableRow key={index}>
+                  <TableCell>
+                    <img
+                      className="w-[5rem] rounded-lg h-[5rem] object-cover"
+                      src={product.product_image}
+                      alt={product.product_name}
+                    />
+                  </TableCell>
+
                   <TableCell>{product.product_name}</TableCell>
                   <TableCell>{product.supplier_name}</TableCell>
                   <TableCell>

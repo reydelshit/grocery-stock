@@ -65,20 +65,19 @@ export default function ProductsAll() {
     product_image: '',
     supplier_name: '',
   });
-  const [productSpecific, setProductSpecific] = useState<
-    ProductDetailSpecific[]
-  >([]);
 
   const getAllProducts = () => {
-    axios.get('http://localhost/jed-inventory/product.php').then((res) => {
-      console.log(res.data, 'prorduct');
-      setProduct(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`)
+      .then((res) => {
+        console.log(res.data, 'prorduct');
+        setProduct(res.data);
+      });
   };
 
   const deleteProduct = (id: number) => {
     axios
-      .delete('http://localhost/jed-inventory/product.php', {
+      .delete(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`, {
         data: { product_id: id },
       })
       .then((res) => {
@@ -92,13 +91,12 @@ export default function ProductsAll() {
 
   const handleShowUpdateForm = (id: number) => {
     axios
-      .get('http://localhost/jed-inventory/product.php', {
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`, {
         params: {
           product_id: id,
         },
       })
       .then((res) => {
-        setProductSpecific(res.data);
         setProductDetails(res.data[0]);
         console.log(res.data, 'spe prorduct');
       });
@@ -116,7 +114,7 @@ export default function ProductsAll() {
   const handleUpdateProduct = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .put('http://localhost/jed-inventory/product.php', {
+      .put(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`, {
         product_id: productID,
         product_name: productDetails.product_name,
         description: productDetails.description,
@@ -147,7 +145,7 @@ export default function ProductsAll() {
     console.log('dsadas');
     e.preventDefault();
     axios
-      .post('http://localhost/jed-inventory/product.php', {
+      .post(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -181,28 +179,27 @@ export default function ProductsAll() {
           <Input
             onChange={(e) => setSearchProduct(e.target.value)}
             placeholder="Search product.."
-            className="w-[20rem] border-[#618264] border-2 mb-2"
+            className="w-[20rem] border-[#B99470] border-2 mb-2"
           />
           <div className="flex gap-2 mb-2 w-full items-end justify-end">
             <Button
               onClick={() => setShowProductModal(true)}
-              className="bg-[#618264]"
+              className="bg-[#B99470]"
             >
               Add Product
             </Button>
-            <Button onClick={() => navigate('/stock')} className="bg-[#618264]">
+            <Button onClick={() => navigate('/stock')} className="bg-[#B99470]">
               Add Stock
             </Button>
           </div>
         </div>
         <Table className="border-2 mt-[5rem]">
-          <TableHeader className="bg-[#618264] text-white">
+          <TableHeader className="bg-[#B99470] text-white">
             <TableRow>
               <TableHead className="text-white"></TableHead>
               <TableHead className="text-white">Product Name</TableHead>
               <TableHead className="text-white">Supplier</TableHead>
 
-              <TableHead className="text-white">Date Expiration</TableHead>
               <TableHead className="text-white">Status</TableHead>
               <TableHead className="text-white">Stocks</TableHead>
 
@@ -225,9 +222,6 @@ export default function ProductsAll() {
                   <TableCell>{prod.supplier_name}</TableCell>
 
                   <TableCell>
-                    {moment(prod.expiration_date).format('LL')}
-                  </TableCell>
-                  <TableCell>
                     {prod.stocks > 20 ? 'IN STOCK' : 'OUT OF STOCK'}
                   </TableCell>
                   <TableCell>{prod.stocks}</TableCell>
@@ -235,19 +229,19 @@ export default function ProductsAll() {
                   <TableCell className="flex gap-2 w-[20rem] ">
                     <Button
                       onClick={() => deleteProduct(prod.product_id)}
-                      className="bg-[#618264]"
+                      className="bg-[#B99470]"
                     >
                       Delete
                     </Button>
                     <Button
                       onClick={() => handleShowUpdateForm(prod.product_id)}
-                      className="bg-[#618264]"
+                      className="bg-[#B99470]"
                     >
                       Update
                     </Button>
                     <Button
                       onClick={() => navigate('/stock')}
-                      className="bg-[#618264]"
+                      className="bg-[#B99470]"
                     >
                       Add stocks
                     </Button>
@@ -274,14 +268,6 @@ export default function ProductsAll() {
             </div>
 
             <div>
-              <Label>Description</Label>
-              <Input
-                defaultValue={productDetails.description}
-                onChange={handleInputChange}
-                name="description"
-              />
-            </div>
-            <div>
               <Label>Expiration Date</Label>
               <Input
                 type="date"
@@ -296,19 +282,19 @@ export default function ProductsAll() {
               <Input
                 defaultValue={productDetails.supplier_name}
                 onChange={handleInputChange}
-                name="product_supplier"
+                name="supplier_name"
               />
             </div>
             <div className="flex gap-2">
               <Button
                 onClick={() => setShowUpdateForm(false)}
                 type="submit"
-                className="mt-2 bg-[#618264]"
+                className="mt-2 bg-[#B99470]"
               >
                 Cancel
               </Button>
 
-              <Button type="submit" className="mt-2 bg-[#618264]">
+              <Button type="submit" className="mt-2 bg-[#B99470]">
                 Submit
               </Button>
             </div>
@@ -319,7 +305,7 @@ export default function ProductsAll() {
       {showProductModal && (
         <div className="absolute w-full h-full top-0 z-50 bg-[#f2f2f0] bg-opacity-80 flex justify-center items-center">
           <form
-            className="bg-white w-[35rem] h-fit p-4 rounded-md border-[#618264] border-2 mt-[20rem]"
+            className="bg-white w-[35rem] h-fit p-4 rounded-md border-[#B99470] border-2 mt-[20rem]"
             onSubmit={handleSubmit}
           >
             <div className="mb-2">
@@ -346,23 +332,17 @@ export default function ProductsAll() {
             </div>
 
             <div>
-              <Label>Description</Label>
-              <Input required onChange={handleInputChange} name="description" />
+              <Label>Supplier</Label>
+              <Input
+                required
+                onChange={handleInputChange}
+                name="supplier_name"
+              />
             </div>
 
             <div>
               <Label>Starting Stocks</Label>
               <Input required onChange={handleInputChange} name="stocks" />
-            </div>
-
-            <div>
-              <Label>Expiration</Label>
-              <Input
-                required
-                type="date"
-                onChange={handleInputChange}
-                name="expiration_date"
-              />
             </div>
 
             <div className="gap-2 flex">

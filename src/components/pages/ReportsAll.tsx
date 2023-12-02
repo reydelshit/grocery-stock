@@ -34,17 +34,21 @@ export default function ReportsAll() {
   const [product, setProduct] = useState<ProductDetails[]>([]);
 
   const getReports = () => {
-    axios.get('http://localhost/jed-inventory/reports.php').then((res) => {
-      console.log(res.data);
-      setReports(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/reports.php`)
+      .then((res) => {
+        console.log(res.data);
+        setReports(res.data);
+      });
   };
 
   const getAllProducts = () => {
-    axios.get('http://localhost/jed-inventory/product.php').then((res) => {
-      console.log(res.data, 'prorduct');
-      setProduct(res.data);
-    });
+    axios
+      .get(`${import.meta.env.VITE_GROCERY_STOCK}/product.php`)
+      .then((res) => {
+        console.log(res.data, 'prorduct');
+        setProduct(res.data);
+      });
   };
 
   useEffect(() => {
@@ -82,7 +86,7 @@ export default function ReportsAll() {
       </h1>
       <div className="mt-[2rem] w-[100%]">
         <Table className="border-2 bg-white">
-          <TableHeader className="bg-[#618264] text-white">
+          <TableHeader className="bg-[#B99470] text-white">
             <TableRow>
               <TableHead className="text-white">Product Name</TableHead>
               <TableHead className="text-white">Supplier</TableHead>
@@ -106,8 +110,8 @@ export default function ReportsAll() {
                     .reduce((total, prod) => total + prod.quantity, 0)}
                 </TableCell>
                 <TableCell>
-                  {Math.floor(CalculatePercentage(product.product_id))} %
-                  Inventory Remaining
+                  {Math.floor(CalculatePercentage(product.product_id))} % Stocks
+                  Remaining
                 </TableCell>
               </TableRow>
             ))}

@@ -7,8 +7,8 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="font-bold w-[15rem] h-screen flex flex-col items-center justify-center border-r-2">
-      <div className="mt-[-15rem]">
+    <div className="font-bold w-[15rem] h-screen flex flex-col items-center border-r-2 relative">
+      <div className="mt-[2rem]">
         <Link className="p-2 mb-2 flex items-center gap-2" to="/">
           {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
           Dashboard
@@ -26,11 +26,11 @@ export default function Sidebar() {
 
         <Link className="p-2 mb-2 flex items-center gap-2" to="/reports/all">
           {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
-          Reports
+          Grocery Stock Reports
         </Link>
       </div>
 
-      <Button onClick={handleLogout} className="bg-[#618264]">
+      <Button onClick={handleLogout} className="bg-[#B99470] fixed bottom-5">
         Logout
       </Button>
     </div>

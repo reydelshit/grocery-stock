@@ -45,14 +45,14 @@ export default function Stock() {
   const [stockHistory, setStockHistory] = useState<StockHistory[]>([]);
   const [quantity, setQuantity] = useState(0 as number);
   const getAllProducts = () => {
-    axios.get('http://localhost/jed-inventory/product.php').then((res) => {
+    axios.get('http://localhost/grocery-stock/product.php').then((res) => {
       console.log(res.data, 'prorduct');
       setProduct(res.data);
     });
   };
 
   const getAllStockHistory = () => {
-    axios.get('http://localhost/jed-inventory/stock.php').then((res) => {
+    axios.get('http://localhost/grocery-stock/stock.php').then((res) => {
       console.log(res.data, 'prorduct');
       setStockHistory(res.data);
     });
@@ -78,7 +78,7 @@ export default function Stock() {
   const handleStockIn = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .post('http://localhost/jed-inventory/stock.php', {
+      .post('http://localhost/grocery-stock/stock.php', {
         product_name: selectedProduct,
         quantity: quantity,
         product_id: selectedProductId,
@@ -95,7 +95,7 @@ export default function Stock() {
   const handleStockOut = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .post('http://localhost/jed-inventory/stock.php', {
+      .post('http://localhost/grocery-stock/stock.php', {
         product_name: selectedProduct,
         quantity: quantity,
         product_id: selectedProductId,
@@ -134,7 +134,7 @@ export default function Stock() {
             <Input
               onChange={(e) => setSearchProduct(e.target.value)}
               placeholder="search product"
-              className="w-[15rem] border-2 border-[#618264] bg-white"
+              className="w-[15rem] border-2 border-[#B99470] bg-white"
             />
           </div>
 
@@ -161,7 +161,7 @@ export default function Stock() {
 
                         <TableCell className="flex gap-2">
                           <Button
-                            className="bg-[#618264]"
+                            className="bg-[#B99470]"
                             onClick={() =>
                               handleOpenFormStockIn(
                                 prod.product_name,
@@ -173,7 +173,7 @@ export default function Stock() {
                           </Button>
 
                           <Button
-                            className="bg-[#618264]"
+                            className="bg-[#B99470]"
                             onClick={() =>
                               handleOpenFormStockOut(
                                 prod.product_name,
@@ -196,13 +196,13 @@ export default function Stock() {
             <h1 className="font-bold text-3xl py-5">
               STOCK IN AND STOCK OUT HISTORY
             </h1>
-            <Button onClick={handleExportStock} className="bg-[#618264]">
+            <Button onClick={handleExportStock} className="bg-[#B99470]">
               Export Report
             </Button>
           </div>
           <div id="stock-table">
             <Table className="border-2 bg-white">
-              <TableHeader className="bg-[#618264] text-white">
+              <TableHeader className="bg-[#B99470] text-white">
                 <TableRow>
                   <TableHead className="text-white">Date</TableHead>
                   <TableHead className="text-white">Product Name</TableHead>
@@ -252,12 +252,12 @@ export default function Stock() {
             <div className="flex gap-2 w-full mt-[2rem]">
               <Button
                 onClick={() => setShowStockFormStockIn(false)}
-                className="bg-[#618264]"
+                className="bg-[#B99470]"
               >
                 Cancel
               </Button>
 
-              <Button type="submit" className="bg-[#618264]">
+              <Button type="submit" className="bg-[#B99470]">
                 Submit
               </Button>
             </div>
@@ -289,12 +289,12 @@ export default function Stock() {
             <div className="flex gap-2 w-full mt-[2rem]">
               <Button
                 onClick={() => setShowStockFormStockOut(false)}
-                className="bg-[#618264]"
+                className="bg-[#B99470]"
               >
                 Cancel
               </Button>
 
-              <Button type="submit" className="bg-[#618264]">
+              <Button type="submit" className="bg-[#B99470]">
                 Submit
               </Button>
             </div>
