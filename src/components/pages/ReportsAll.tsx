@@ -88,6 +88,8 @@ export default function ReportsAll() {
         <Table className="border-2 bg-white">
           <TableHeader className="bg-[#B99470] text-white">
             <TableRow>
+              <TableHead className="text-white">e</TableHead>
+
               <TableHead className="text-white">Product Name</TableHead>
               <TableHead className="text-white">Supplier</TableHead>
               <TableHead className="text-white">Current Stocks</TableHead>
@@ -97,6 +99,13 @@ export default function ReportsAll() {
           <TableBody>
             {product.map((product, index) => (
               <TableRow key={index}>
+                <TableCell>
+                  <img
+                    className="w-[5rem] rounded-lg h-[5rem] object-cover"
+                    src={product.product_image}
+                    alt={product.product_name}
+                  />
+                </TableCell>
                 <TableCell>{product.product_name}</TableCell>
                 <TableCell>{product.supplier_name}</TableCell>
                 <TableCell>
