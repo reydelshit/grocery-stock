@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="p-4 ">
-      <PageHeader title="Dashboard" display="true" description="" />
+      {/* <PageHeader title="Dashboard" display="true" description="" /> */}
 
       <div className="mt-[5rem] flex flex-col">
         <div className="flex gap-2 mb-[2rem]">
@@ -96,23 +96,6 @@ function App() {
               </div>
               <p className="text-xs text-muted-foreground">
                 Total number of products
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-start bg-white w-full">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                NUMBER OF SUPPLIERS
-              </CardTitle>
-              <TbHexagonNumber2 className="w-[3rem] h-[3rem] text-[#618264]" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-8xl font-bold text-[#618264]">
-                {suppliers.length}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Total number of Suppliers
               </p>
             </CardContent>
           </Card>

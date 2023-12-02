@@ -128,12 +128,6 @@ export default function Stock() {
 
   return (
     <div className="relative">
-      <PageHeader
-        title="Stock"
-        display="false"
-        description="Welcome, your central hub providing a comprehensive inventory listing. This intuitive interface facilitates easy monitoring, updating, and management of stock levels, ensuring seamless control and visibility over inventory quantities for efficient operations"
-      />
-
       <div className="flex gap-[5rem] justify-between">
         <div className="w-[30rem]">
           <div className="mt-[2rem] w-full flex justify-end">

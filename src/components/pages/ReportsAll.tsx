@@ -77,12 +77,9 @@ export default function ReportsAll() {
 
   return (
     <div>
-      <PageHeader
-        title="Reports"
-        display="false"
-        description="This is the reports page"
-      />
-
+      <h1 className="text-3xl text-center my-[2rem] font-bold">
+        LIST OF ALL GROCERY REPORTS
+      </h1>
       <div className="mt-[2rem] w-[100%]">
         <Table className="border-2 bg-white">
           <TableHeader className="bg-[#618264] text-white">

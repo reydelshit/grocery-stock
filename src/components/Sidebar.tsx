@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 export default function Sidebar() {
+  const handleLogout = () => {
+    localStorage.removeItem('isLogin');
+    window.location.href = '/login';
+  };
+
   return (
     <div className="font-bold w-[15rem] h-screen flex flex-col items-center justify-center border-r-2">
       <div className="mt-[-15rem]">
@@ -9,30 +14,25 @@ export default function Sidebar() {
           Dashboard
         </Link>
 
-        <Link className="p-2 mb-2 flex items-center gap-2" to="/product">
+        <Link className="p-2 mb-2 flex items-center gap-2" to="/product/all">
           {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
           Product
         </Link>
 
-        <Link className="p-2 mb-2 flex items-center gap-2" to="/supplier">
-          {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
-          Supplier
-        </Link>
         <Link className="p-2 mb-2 flex items-center gap-2" to="/stock">
           {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
           Stock
         </Link>
 
-        <Link className="p-2 mb-2 flex items-center gap-2" to="/reports">
+        <Link className="p-2 mb-2 flex items-center gap-2" to="/reports/all">
           {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
           Reports
         </Link>
-
-        <Link className="p-2 mb-2 flex items-center gap-2" to="/racks">
-          {/* <RxDashboard className="text-md h-[1.5rem] w-[1.5rem]" /> Dashboard */}
-          Racks
-        </Link>
       </div>
+
+      <Button onClick={handleLogout} className="bg-[#618264]">
+        Logout
+      </Button>
     </div>
   );
 }
