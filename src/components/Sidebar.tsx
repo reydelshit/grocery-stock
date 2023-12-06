@@ -7,8 +7,8 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="font-bold w-[15rem] h-screen flex flex-col items-center border-r-2 relative">
-      <div className="mt-[2rem]">
+    <div className="font-bold w-[18rem] h-screen flex flex-col items-center relative bg-[#B99470] text-white">
+      <div className="mt-[5rem]">
         <Link className="p-2 mb-2 flex items-center gap-2" to="/">
           Dashboard
         </Link>
@@ -26,7 +26,10 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <Button onClick={handleLogout} className="bg-[#B99470] fixed bottom-5">
+      <Button
+        onClick={handleLogout}
+        className="bg-white text-black fixed bottom-5 w-[8rem]"
+      >
         Logout
       </Button>
     </div>
