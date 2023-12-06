@@ -37,7 +37,7 @@ export default function Login() {
         />
         <button
           onClick={handleLogin}
-          className="p-2 bg-[#618264] text-white rounded-md w-[10rem]"
+          className="p-2 bg-[#B99470] text-white rounded-md w-[10rem]"
         >
           Login
         </button>
